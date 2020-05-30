@@ -2,9 +2,8 @@ import tkinter as tk
 from tkinter import messagebox
 from random import sample
 
-alps = "QWERTYUIOP"
-quest = sample(alps,4)
 cnt = 0
+quest = sample("QWERTYUIOP",4)
 
 def compare():
     global cnt
@@ -24,8 +23,9 @@ def compare():
         tk.messagebox.showinfo("Game over!", "You lose!")
 
 def init_game():
-    global cnt
-    cnt = 0
+    global cnt; cnt = 0
+    global quest; quest = sample("QWERTYUIOP",4)
+    
     for i in range(8):
         labelResult[i]["text"] = "---"
 
