@@ -2,30 +2,36 @@ import tkinter as tk
 from tkinter import messagebox
 from random import sample
 
-cnt = 0
-quest = sample("QWERTYUIOP",4)
+class HitAndBlow:
+    "Encapsulate the global variables into objects"
+    def __init__(self):
+        self.cnt = 0
+        self.quest = sample("QWERTYUIOP",4)
+
+game = HitAndBlow()
 
 def compare():
-    global cnt
-    cnt += 1
+    game.cnt += 1
     hit, blow = 0, 0
-    ans = textans.get().upper()
+    ans = textans.get()
     for i in range(4):
-        if ans[i] == quest[i]: hit+=1
-        elif ans[i] in quest: blow+=1
-    
-    s = "{0} | {1}  Hit:{2}, Blow:{3}".format(cnt, ans, hit, blow)
-    labelResult[cnt-1]["text"] = s
-    
+        if ans[i] == game.quest[i]:
+            hit+=1
+            continue
+        elif ans[i] in game.quest:
+            blow+=1
+
+    labelResult[game.cnt - 1]["text"] = f"{game.cnt} | {ans}  Hit:{hit}, Blow:{blow}"
+
     if hit == 4:
         tk.messagebox.showinfo("Congratulations!", "You win!")
-    elif cnt == 8:
+    elif game.cnt == 8:
         tk.messagebox.showinfo("Game over!", "You lose!")
 
-def init_game():
-    global cnt; cnt = 0
-    global quest; quest = sample("QWERTYUIOP",4)
-    
+def restart():
+    game.cnt = 0
+    game.quest = sample("QWERTYUIOP",4)
+
     for i in range(8):
         labelResult[i]["text"] = "---"
 
@@ -37,7 +43,7 @@ win.geometry("360x320")
 labelans = tk.Label(win, text='Answer:', font="SimSun")
 labelans.grid(column=1, row=0)
 
-restartButton = tk.Button(win, text="リスタート", command=init_game)
+restartButton = tk.Button(win, text="リスタート", command=restart)
 restartButton.grid(column=0, row=1)
 
 textans = tk.Entry(font="SimSun", width=23, justify="center")
