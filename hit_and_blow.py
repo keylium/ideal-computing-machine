@@ -17,7 +17,6 @@ def compare():
     for i in range(4):
         if ans[i] == game.quest[i]:
             hit+=1
-            continue
         elif ans[i] in game.quest:
             blow+=1
 
