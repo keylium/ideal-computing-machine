@@ -17,15 +17,16 @@ def compare():
     for i in range(4):
         if ans[i] == game.quest[i]:
             hit+=1
+            continue
         elif ans[i] in game.quest:
             blow+=1
 
     labelResult[game.cnt - 1]["text"] = f"{game.cnt} | {ans}  Hit:{hit}, Blow:{blow}"
 
     if hit == 4:
-        tk.messagebox.showinfo("Congratulations!", "You win!")
+        messagebox.showinfo("Congratulations!", "You win!")
     elif game.cnt == 8:
-        tk.messagebox.showinfo("Game over!", "You lose!")
+        messagebox.showinfo("Game over!", "You lose!")
 
 def restart():
     game.cnt = 0
